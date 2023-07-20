@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+<body>
+    <form method="POST" action="/text/search_document_ranking">
+        {% csrf_token %}
+        <div>
+            <div>
+                <h1>Enter Details</h1>
+                <div>
+                    <label>Sentence</label>
+                    <div>
+                        {{ form.query }}
+                    </div>
+                    <div>
+                        <label></label>
+                        <div>
+                            <button>Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Npm</th>
+                <th>Nama</th>
+                <th>Judul Skripsi</th>
+                <th>Abstraksi Skripsi</th>
+                <th>Similarity</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in result_list %}
+            <tr>
+                <td>{{ item.npm }}</td>
+                <td>{{ item.nama }}</td>
+                <td>{{ item.judul_skripsi }}</td>
+                <td>{{ item.abstraksi_skripsi }}</td>
+                <td>{{ item.similarity }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>  
